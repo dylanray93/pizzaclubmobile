@@ -11,11 +11,34 @@ import {
   Cell, PieChart, Pie
 } from 'recharts'
 
+interface MemberComparison {
+  member: string;
+  apps?: number;
+  crust?: number;
+  drinks?: number;
+  options?: number;
+  sauce?: number;
+  value_for_money?: number;
+  vibes?: number;
+}
+
+interface TimelineTrend {
+  date: string;
+  restaurant?: string;
+  apps?: number;
+  crust?: number;
+  drinks?: number;
+  options?: number;
+  sauce?: number;
+  value_for_money?: number;
+  vibes?: number;
+}
+
 interface AnalyticsData {
   memberRatingDistribution: { name: string; count: number; color: string }[]
   categoryAverages: { category: string; average: number }[]
-  memberComparison: { member: string; [key: string]: number }[]
-  timelineTrends: { date: string; [key: string]: number | string }[]
+  memberComparison: MemberComparison[]
+  timelineTrends: TimelineTrend[]
   ratingDistribution: { rating: string; count: number }[]
 }
 
@@ -76,11 +99,11 @@ export default function Analytics() {
       const memberRankings = rankings.filter(r => r.rater === member.name)
       if (memberRankings.length === 0) return { member: member.name }
       
-      const result: Record<string, number | string> = { member: member.name }
+      const result: MemberComparison = { member: member.name }
       categories.forEach(cat => {
         const key = `ranking_${cat}` as keyof Ranking
         const values = memberRankings.map(r => r[key] as number).filter(v => v > 0)
-        result[cat] = values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0
+        ;(result as any)[cat] = values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0
       })
       return result
     }).filter(m => Object.keys(m).length > 1)
@@ -96,7 +119,7 @@ export default function Analytics() {
       .slice(-10) // Last 10 restaurants
 
     const timelineTrends = restaurantsByDate.map(restaurant => {
-      const result: Record<string, number | string> = {
+      const result: TimelineTrend = {
         date: new Date(restaurant.date_visited).toLocaleDateString(),
         restaurant: restaurant.name.substring(0, 15) + (restaurant.name.length > 15 ? '...' : '')
       }
@@ -104,7 +127,7 @@ export default function Analytics() {
       categories.forEach(cat => {
         const key = `ranking_${cat}` as keyof Ranking
         const values = restaurant.rankings.map(r => r[key] as number).filter(v => v > 0)
-        result[cat] = values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0
+        ;(result as any)[cat] = values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0
       })
       
       return result
