@@ -126,7 +126,7 @@ export default function Members() {
               Club Members ({attendees.length})
             </h2>
             <p className="text-gray-600">
-              Everyone who's part of our monthly pizza adventures
+              Everyone who&apos;s part of our monthly pizza adventures
             </p>
           </div>
 

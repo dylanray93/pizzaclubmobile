@@ -200,7 +200,7 @@ export default function Rankings() {
             {formData.rater && availableRestaurants.length === 0 && (
               <div className="win95-panel bg-blue-100 border-blue-300 mb-4 p-2">
                 <div className="text-blue-800 text-xs">
-                  🎉 Great job! You've already ranked all available restaurants. Check back when new places are added!
+                  🎉 Great job! You&apos;ve already ranked all available restaurants. Check back when new places are added!
                 </div>
               </div>
             )}
@@ -208,7 +208,7 @@ export default function Rankings() {
             {isAlreadyRanked && (
               <div className="win95-panel bg-yellow-100 border-yellow-300 mb-4 p-2">
                 <div className="text-yellow-800 text-xs">
-                  ⚠️ You've already ranked "{formData.restaurant_id}". Please select a different restaurant.
+                  ⚠️ You&apos;ve already ranked &quot;{formData.restaurant_id}&quot;. Please select a different restaurant.
                 </div>
               </div>
             )}

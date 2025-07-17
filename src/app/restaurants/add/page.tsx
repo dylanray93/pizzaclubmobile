@@ -66,7 +66,7 @@ export default function AddRestaurant() {
               Add New Restaurant
             </h2>
             <p className="text-gray-600">
-              Add a new pizza place to the club's collection
+              Add a new pizza place to the club&apos;s collection
             </p>
           </div>
 

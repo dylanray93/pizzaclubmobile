@@ -128,7 +128,7 @@ export default function Restaurants() {
                   All Restaurants ({restaurants.length})
                 </h2>
                 <p className="text-gray-600">
-                  Pizza places we've visited with average ratings from all members
+                  Pizza places we&apos;ve visited with average ratings from all members
                 </p>
               </div>
               
