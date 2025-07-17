@@ -274,12 +274,12 @@ export default function Rankings() {
                 </button>
                 <button
                   type="submit"
-                  disabled={submitting || isAlreadyRanked || (formData.rater && availableRestaurants.length === 0)}
+                  disabled={submitting || isAlreadyRanked || (!!formData.rater && availableRestaurants.length === 0)}
                   className="win95-button text-xs font-bold"
                 >
                   {submitting ? 'Submitting...' : 
                    isAlreadyRanked ? 'Already Ranked' :
-                   (formData.rater && availableRestaurants.length === 0) ? 'All Restaurants Ranked' :
+                   (!!formData.rater && availableRestaurants.length === 0) ? 'All Restaurants Ranked' :
                    'Submit Ranking'}
                 </button>
               </div>
