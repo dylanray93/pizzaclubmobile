@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { signOut } from 'next-auth/react'
+import Link from 'next/link'
 import { getAttendees, getAllRankings } from '@/lib/database'
 import { Attendee, Ranking } from '@/types/database'
 
@@ -102,9 +103,9 @@ export default function Members() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-4">
-              <a href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700">
+              <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700">
                 🍕 Pizza Club
-              </a>
+              </Link>
               <span className="text-gray-400">→</span>
               <span className="text-lg font-medium text-gray-600">Members</span>
             </div>

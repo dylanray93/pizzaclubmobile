@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { signOut } from 'next-auth/react'
+import Link from 'next/link'
 import { getRestaurants, getAttendees, addRanking, getUserRankings } from '@/lib/database'
 import { Restaurant, Attendee, Ranking } from '@/types/database'
 
@@ -166,7 +167,7 @@ export default function Rankings() {
       <div className="win95-menubar">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center space-x-4">
-            <a href="/" className="font-bold hover:underline">🍕 Pizza Club v1.0</a>
+            <Link href="/" className="font-bold hover:underline">🍕 Pizza Club v1.0</Link>
             <span className="text-xs">→ Rankings.exe</span>
           </div>
           <button onClick={() => signOut()} className="win95-button text-xs">Exit</button>

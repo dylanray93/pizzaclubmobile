@@ -2,19 +2,20 @@
 
 import { useState, useEffect } from 'react'
 import { signOut } from 'next-auth/react'
+import Link from 'next/link'
 import { getAttendees, getAllRankings, getRestaurants } from '@/lib/database'
 import { Attendee, Ranking, Restaurant } from '@/types/database'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   LineChart, Line, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar,
-  ScatterChart, Scatter, Cell, PieChart, Pie
+  Cell, PieChart, Pie
 } from 'recharts'
 
 interface AnalyticsData {
   memberRatingDistribution: { name: string; count: number; color: string }[]
   categoryAverages: { category: string; average: number }[]
-  memberComparison: { member: string; [key: string]: any }[]
-  timelineTrends: { date: string; [key: string]: any }[]
+  memberComparison: { member: string; [key: string]: number }[]
+  timelineTrends: { date: string; [key: string]: number | string }[]
   ratingDistribution: { rating: string; count: number }[]
 }
 
@@ -75,7 +76,7 @@ export default function Analytics() {
       const memberRankings = rankings.filter(r => r.rater === member.name)
       if (memberRankings.length === 0) return { member: member.name }
       
-      const result: any = { member: member.name }
+      const result: Record<string, number | string> = { member: member.name }
       categories.forEach(cat => {
         const key = `ranking_${cat}` as keyof Ranking
         const values = memberRankings.map(r => r[key] as number).filter(v => v > 0)
@@ -95,7 +96,7 @@ export default function Analytics() {
       .slice(-10) // Last 10 restaurants
 
     const timelineTrends = restaurantsByDate.map(restaurant => {
-      const result: any = {
+      const result: Record<string, number | string> = {
         date: new Date(restaurant.date_visited).toLocaleDateString(),
         restaurant: restaurant.name.substring(0, 15) + (restaurant.name.length > 15 ? '...' : '')
       }
@@ -175,9 +176,9 @@ export default function Analytics() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-4">
-              <a href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700">
+              <Link href="/" className="text-2xl font-bold text-gray-900 hover:text-gray-700">
                 🍕 Pizza Club
-              </a>
+              </Link>
               <span className="text-gray-400">→</span>
               <span className="text-lg font-medium text-gray-600">Analytics</span>
             </div>
