@@ -103,7 +103,17 @@ export default function Analytics() {
       categories.forEach(cat => {
         const key = `ranking_${cat}` as keyof Ranking
         const values = memberRankings.map(r => r[key] as number).filter(v => v > 0)
-        ;(result as any)[cat] = values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0
+        const average = values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0
+        
+        switch(cat) {
+          case 'apps': result.apps = average; break;
+          case 'crust': result.crust = average; break;
+          case 'drinks': result.drinks = average; break;
+          case 'options': result.options = average; break;
+          case 'sauce': result.sauce = average; break;
+          case 'value_for_money': result.value_for_money = average; break;
+          case 'vibes': result.vibes = average; break;
+        }
       })
       return result
     }).filter(m => Object.keys(m).length > 1)
@@ -127,7 +137,17 @@ export default function Analytics() {
       categories.forEach(cat => {
         const key = `ranking_${cat}` as keyof Ranking
         const values = restaurant.rankings.map(r => r[key] as number).filter(v => v > 0)
-        ;(result as any)[cat] = values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0
+        const average = values.length > 0 ? values.reduce((a, b) => a + b, 0) / values.length : 0
+        
+        switch(cat) {
+          case 'apps': result.apps = average; break;
+          case 'crust': result.crust = average; break;
+          case 'drinks': result.drinks = average; break;
+          case 'options': result.options = average; break;
+          case 'sauce': result.sauce = average; break;
+          case 'value_for_money': result.value_for_money = average; break;
+          case 'vibes': result.vibes = average; break;
+        }
       })
       
       return result
